@@ -45,9 +45,9 @@ namespace PersonalBudget.Tests.v1.Business
             using (var context = DataBaseContext.GetContext(databaseName))
             {
                 await SaveDefaultCategories(context, userId);
-                var c = context.Categorie.FirstOrDefault();
-                string categorieId = c.Id;
-                context.Entry(c).State = EntityState.Detached;
+                var categorieTest = context.Categorie.FirstOrDefault();
+                string categorieId = categorieTest.Id;
+                context.Entry(categorieTest).State = EntityState.Detached;
                 ICategorieBO categorieBO = new CategorieBO(context, null);
                 Categorie categorie = new Categorie
                 {
@@ -67,9 +67,9 @@ namespace PersonalBudget.Tests.v1.Business
             using (var context = DataBaseContext.GetContext(databaseName))
             {
                 await SaveDefaultCategories(context, userId);
-                var c = context.Categorie.FirstOrDefault();
-                string categorieId = c.Id;
-                context.Entry(c).State = EntityState.Detached;
+                var categorieTest = context.Categorie.FirstOrDefault();
+                string categorieId = categorieTest.Id;
+                context.Entry(categorieTest).State = EntityState.Detached;
                 ICategorieBO categorieBO = new CategorieBO(context, null);
                 var result = await categorieBO.Delete(categorieId);
                 Assert.AreEqual(result, 1);

@@ -121,16 +121,6 @@ namespace PersonalBudget.Business.v1.Objects
 
                 ValidateFieldsEmpty(release);
 
-                Release releaseUpdate = await GetById(id);
-                if (releaseUpdate == null)
-                {
-                    throw new NotFoundException("Not Found");
-                }
-                else
-                {
-                    _context.Entry(releaseUpdate).State = EntityState.Detached;
-                }
-
                 _context.Entry(release).State = EntityState.Modified;
                 int result = await _context.SaveChangesAsync();
                 return result;
@@ -162,6 +152,7 @@ namespace PersonalBudget.Business.v1.Objects
                 {
                     throw new NotFoundException("Release not found");
                 }
+                _context.Entry(release).State = EntityState.Detached;
                 _context.Release.Remove(release);
                 int result = await _context.SaveChangesAsync();
                 return result;

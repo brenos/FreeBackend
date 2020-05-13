@@ -61,9 +61,9 @@ namespace PersonalBudget.Tests.v1.Business
             using (var context = DataBaseContext.GetContext(databaseName))
             {
                 await SaveDefaultTransaction(context, userId);
-                var t = context.Transaction.FirstOrDefault();
-                string transactionId = t.Id;
-                context.Entry(t).State = EntityState.Detached;
+                var transactionTest = context.Transaction.FirstOrDefault();
+                string transactionId = transactionTest.Id;
+                context.Entry(transactionTest).State = EntityState.Detached;
                 ITransactionBO transactionBO = new TransactionBO(context, null);
                 Transaction transaction = new Transaction
                 {
@@ -89,9 +89,9 @@ namespace PersonalBudget.Tests.v1.Business
             using (var context = DataBaseContext.GetContext(databaseName))
             {
                 await SaveDefaultTransaction(context, userId);
-                var t = context.Transaction.FirstOrDefault();
-                string transactionId = t.Id;
-                context.Entry(t).State = EntityState.Detached;
+                var transactionTest = context.Transaction.FirstOrDefault();
+                string transactionId = transactionTest.Id;
+                context.Entry(transactionTest).State = EntityState.Detached;
                 ITransactionBO transactionBO = new TransactionBO(context, null);
                 var result = await transactionBO.Delete(transactionId);
                 Assert.AreEqual(result, 1);

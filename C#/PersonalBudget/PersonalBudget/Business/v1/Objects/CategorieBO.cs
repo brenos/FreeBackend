@@ -1,5 +1,4 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PersonalBudget.Exceptions;
 using PersonalBudget.Models;
 using System;
@@ -121,16 +120,6 @@ namespace PersonalBudget.Business.v1.Objects
 
                 ValidateFieldsEmpty(categorie);
 
-                Categorie categorieUpdate = await GetById(id);
-                if (categorieUpdate == null)
-                {
-                    throw new NotFoundException("Not Found");
-                }
-                else
-                {
-                    _context.Entry(categorieUpdate).State = EntityState.Detached;
-                }
-
                 _context.Entry(categorie).State = EntityState.Modified;
                 int result = await _context.SaveChangesAsync();
                 return result;
@@ -147,7 +136,7 @@ namespace PersonalBudget.Business.v1.Objects
             {
                 throw e;
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 throw e;
             }
@@ -162,6 +151,7 @@ namespace PersonalBudget.Business.v1.Objects
                 {
                     throw new NotFoundException("Categorie not found");
                 }
+                _context.Entry(categorie).State = EntityState.Detached;
                 _context.Categorie.Remove(categorie);
                 int result = await _context.SaveChangesAsync();
                 return result;

@@ -54,9 +54,9 @@ namespace PersonalBudget.Tests.v1.Business
             using (var context = DataBaseContext.GetContext(databaseName))
             {
                 await SaveDefaultRelease(context, transactionId:transactionId);
-                var r = context.Release.FirstOrDefault();
-                string releaseId = r.Id;
-                context.Entry(r).State = EntityState.Detached;
+                var releaseTest = context.Release.FirstOrDefault();
+                string releaseId = releaseTest.Id;
+                context.Entry(releaseTest).State = EntityState.Detached;
                 IReleaseBO releaseBO = new ReleaseBO(context, null);
                 Release release = new Release
                 {
@@ -78,9 +78,9 @@ namespace PersonalBudget.Tests.v1.Business
             using (var context = DataBaseContext.GetContext(databaseName))
             {
                 await SaveDefaultRelease(context, transactionId);
-                var r = context.Release.FirstOrDefault();
-                string releaseId = r.Id;
-                context.Entry(r).State = EntityState.Detached;
+                var releaseTest = context.Release.FirstOrDefault();
+                string releaseId = releaseTest.Id;
+                context.Entry(releaseTest).State = EntityState.Detached;
                 IReleaseBO releaseBO = new ReleaseBO(context, null);
                 var result = await releaseBO.Delete(releaseId);
                 Assert.AreEqual(result, 1);

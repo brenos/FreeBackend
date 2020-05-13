@@ -122,13 +122,6 @@ namespace PersonalBudget.Business.v1.Objects
 
                 ValidateFieldsEmpty(transaction);
 
-                Transaction transactionUpdate = await GetById(id);
-                if (transactionUpdate == null)
-                {
-                    throw new NotFoundException("Not Found");
-                }
-                _context.Entry(transactionUpdate).State = EntityState.Detached;
-
                 _context.Entry(transaction).State = EntityState.Modified;
                 int result = await _context.SaveChangesAsync();
                 return result;
@@ -160,6 +153,7 @@ namespace PersonalBudget.Business.v1.Objects
                 {
                     throw new NotFoundException("Transaction not found");
                 }
+                _context.Entry(transaction).State = EntityState.Detached;
                 _context.Transaction.Remove(transaction);
                 int result = await _context.SaveChangesAsync();
                 return result;

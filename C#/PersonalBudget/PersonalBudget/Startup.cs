@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using PersonalBudget.Models;
 
 namespace PersonalBudget
@@ -31,6 +25,10 @@ namespace PersonalBudget
                 options.UseMySQL("server=localhost;port=3306;user=root;password=12345678;database=PersonalBudget"),
                 ServiceLifetime.Singleton);
 
+            services.AddDbContext<PersonalBudgetRplContext>(options =>
+                options.UseMySQL("server=localhost;port=3306;user=root;password=12345678;database=PersonalBudget"),
+                ServiceLifetime.Singleton);
+
             services.AddApiVersioning(p =>
             {
                 p.DefaultApiVersion = new ApiVersion(1, 0);
@@ -43,6 +41,8 @@ namespace PersonalBudget
                 p.GroupNameFormat = "'v'VVV";
                 p.SubstituteApiVersionInUrl = true;
             });
+
+            services.AddTransient<Business.v1.ICategorieBO, Business.v1.Objects.CategorieBO>();
 
             services.AddControllers();
         }

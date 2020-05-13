@@ -116,17 +116,7 @@ namespace PersonalBudget.Business.v1.Objects
 
                 ValidateFieldsEmpty(transactionType);
 
-                TransactionType typeUpdate = await GetById(id);
-                if (typeUpdate == null)
-                {
-                    throw new NotFoundException("Not Found");
-                }
-                else
-                {
-                    _context.Entry(typeUpdate).State = EntityState.Detached;
-                }
-
-                _context.Entry(typeUpdate).State = EntityState.Modified;
+                _context.Entry(transactionType).State = EntityState.Modified;
                 int result = await _context.SaveChangesAsync();
                 return result;
             }
@@ -157,6 +147,7 @@ namespace PersonalBudget.Business.v1.Objects
                 {
                     throw new NotFoundException("Transaction Type not found");
                 }
+                _context.Entry(transactionType).State = EntityState.Detached;
                 _context.TransactionType.Remove(transactionType);
                 int result = await _context.SaveChangesAsync();
                 return result;
