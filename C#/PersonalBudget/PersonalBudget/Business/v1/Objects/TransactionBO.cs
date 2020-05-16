@@ -14,7 +14,7 @@ namespace PersonalBudget.Business.v1.Objects
         private PersonalBudgetContext _context;
         private PersonalBudgetRplContext _contextRpl;
 
-        public TransactionBO(PersonalBudgetContext context, PersonalBudgetRplContext contextRpl)
+        public TransactionBO(PersonalBudgetContext context, PersonalBudgetRplContext contextRpl=null)
         {
             _context = context;
             _contextRpl = contextRpl;
@@ -31,11 +31,11 @@ namespace PersonalBudget.Business.v1.Objects
                 Transaction transaction = null;
                 if (!ContextRplExists())
                 {
-                    transaction = await _context.Transaction.AsNoTracking().FirstOrDefaultAsync(t => t.Id.Equals(id));
+                    transaction = await _context.Transaction.AsNoTracking().Where(t => t.Id.Equals(id)).FirstOrDefaultAsync();
                 }
                 else
                 {
-                    transaction = await _contextRpl.Transaction.AsNoTracking().FirstOrDefaultAsync(t => t.Id.Equals(id));
+                    transaction = await _contextRpl.Transaction.AsNoTracking().Where(t => t.Id.Equals(id)).FirstOrDefaultAsync();
                 }
                 if (transaction == null)
                 {
@@ -95,7 +95,7 @@ namespace PersonalBudget.Business.v1.Objects
             try
             {
                 ValidateFieldsEmpty(transaction);
-                transaction.Id = System.Guid.NewGuid().ToString();
+                transaction.Id = Guid.NewGuid().ToString();
                 _context.Transaction.Add(transaction);
                 int result = await _context.SaveChangesAsync();
 
@@ -111,24 +111,37 @@ namespace PersonalBudget.Business.v1.Objects
             }
         }
 
-        public async Task<int> Update(string id, Transaction transaction)
+        public async Task<int> Update(string id, Transaction transactionUpdate)
         {
             try
             {
-                if (id != transaction.Id)
+                if (id != transactionUpdate.Id)
                 {
                     throw new Exception("Different id");
                 }
+                var transaction = await GetById(id);
+                if (transaction == null)
+                {
+                    throw new NotFoundException();
+                }
 
-                ValidateFieldsEmpty(transaction);
+                ValidateFieldsEmpty(transactionUpdate);
 
-                _context.Entry(transaction).State = EntityState.Modified;
+                _context.Entry<Transaction>(transactionUpdate).State = EntityState.Modified;
                 int result = await _context.SaveChangesAsync();
+                _context.Entry<Transaction>(transactionUpdate).State = EntityState.Detached;
                 return result;
             }
-            catch (DbUpdateConcurrencyException e) when (!TransactionExists(id))
+            catch (DbUpdateConcurrencyException e)
             {
-                throw e;
+                if (!TransactionExists(id))
+                {
+                    throw new NotFoundException();
+                }
+                else
+                {
+                    throw e;
+                }
             }
             catch (DbException e)
             {
@@ -138,7 +151,7 @@ namespace PersonalBudget.Business.v1.Objects
             {
                 throw e;
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 throw e;
             }

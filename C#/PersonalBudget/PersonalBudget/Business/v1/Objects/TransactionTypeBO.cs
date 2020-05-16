@@ -14,7 +14,7 @@ namespace PersonalBudget.Business.v1.Objects
         private PersonalBudgetContext _context;
         private PersonalBudgetRplContext _contextRpl;
 
-        public TransactionTypeBO(PersonalBudgetContext context, PersonalBudgetRplContext contextRpl)
+        public TransactionTypeBO(PersonalBudgetContext context, PersonalBudgetRplContext contextRpl=null)
         {
             _context = context;
             _contextRpl = contextRpl;
@@ -31,11 +31,11 @@ namespace PersonalBudget.Business.v1.Objects
                 TransactionType transactionType = null;
                 if (!ContextRplExists())
                 {
-                    transactionType = await _context.TransactionType.AsNoTracking().FirstOrDefaultAsync(t => t.Id.Equals(id));
+                    transactionType = await _context.TransactionType.AsNoTracking().Where(t => t.Id.Equals(id)).FirstOrDefaultAsync();
                 }
                 else
                 {
-                    transactionType = await _contextRpl.TransactionType.AsNoTracking().FirstOrDefaultAsync(t => t.Id.Equals(id));
+                    transactionType = await _contextRpl.TransactionType.AsNoTracking().Where(t => t.Id.Equals(id)).FirstOrDefaultAsync();
                 }
                 if (transactionType == null)
                 {
@@ -105,19 +105,25 @@ namespace PersonalBudget.Business.v1.Objects
             }
         }
 
-        public async Task<int> Update(string id, TransactionType transactionType)
+        public async Task<int> Update(string id, TransactionType transactionTypeUpdate)
         {
             try
             {
-                if (id != transactionType.Id)
+                if (id != transactionTypeUpdate.Id)
                 {
                     throw new Exception("Different id");
                 }
+                var transactionType = await GetById(id);
+                if (transactionType == null)
+                {
+                    throw new NotFoundException();
+                }
 
-                ValidateFieldsEmpty(transactionType);
+                ValidateFieldsEmpty(transactionTypeUpdate);
 
-                _context.Entry(transactionType).State = EntityState.Modified;
+                _context.Entry<TransactionType>(transactionTypeUpdate).State = EntityState.Modified;
                 int result = await _context.SaveChangesAsync();
+                _context.Entry<TransactionType>(transactionTypeUpdate).State = EntityState.Detached;
                 return result;
             }
             catch (DbUpdateConcurrencyException e) when (!TransactionTypeExists(id))
@@ -147,7 +153,7 @@ namespace PersonalBudget.Business.v1.Objects
                 {
                     throw new NotFoundException("Transaction Type not found");
                 }
-                _context.Entry(transactionType).State = EntityState.Detached;
+                _context.Entry<TransactionType>(transactionType).State = EntityState.Detached;
                 _context.TransactionType.Remove(transactionType);
                 int result = await _context.SaveChangesAsync();
                 return result;

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Common;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonalBudget.Business.v1;
 using PersonalBudget.Models;
@@ -13,18 +10,18 @@ namespace PersonalBudget.Controllers.v1
     [ApiController]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
-    public class CategorieController : ControllerBase
+    public class ReleaseController : ControllerBase
     {
-        // GET: api/Categorie/userId
-        [HttpGet("{userId}")]
-        public async Task<ActionResult<IEnumerable<Categorie>>> GetByUserId(
-            [FromServices]ICategorieBO categorieBO,
-            string userId)
+        // GET: api/re;ease/transactionId
+        [HttpGet("{transactionId}")]
+        public async Task<ActionResult<IEnumerable<Release>>> GetByTransactionId(
+            [FromServices]IReleaseBO releaseBO,
+            string transactionId)
         {
             try
             {
-                var categories = await categorieBO.GetByUserId(userId);
-                return Ok(categories);
+                var releases = await releaseBO.GetByTransactionId(transactionId);
+                return Ok(releases);
             }
             catch (Exceptions.NotFoundException e)
             {
@@ -36,15 +33,15 @@ namespace PersonalBudget.Controllers.v1
             }
         }
 
-        // POST: api/Categorie
+        // POST: api/release
         [HttpPost]
         public async Task<IActionResult> Post(
-            [FromServices]ICategorieBO categorieBO,
-            [FromBody]Categorie categorie)
+            [FromServices]IReleaseBO releaseBO,
+            [FromBody]Release release)
         {
             try
             {
-                int result = await categorieBO.Save(categorie);
+                int result = await releaseBO.Save(release);
                 if (result == 1)
                 {
                     return CreatedAtAction(null, null);
@@ -64,16 +61,16 @@ namespace PersonalBudget.Controllers.v1
             }
         }
 
-        // PUT: api/Categorie/id
+        // PUT: api/release/id
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(
-            [FromServices]ICategorieBO categorieBO,
+            [FromServices]IReleaseBO releaseBO,
             string id,
-            [FromBody]Categorie categorie)
+            [FromBody]Release release)
         {
             try
             {
-                int result = await categorieBO.Update(id, categorie);
+                int result = await releaseBO.Update(id, release);
                 if (result == 1)
                 {
                     return NoContent();
@@ -101,15 +98,15 @@ namespace PersonalBudget.Controllers.v1
             }
         }
 
-        // DELETE: api/ApiWithActions/id
+        // DELETE: api/release/id
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(
-            [FromServices]ICategorieBO categorieBO,
+            [FromServices]IReleaseBO releaseBO,
             string id)
         {
             try
             {
-                int result = await categorieBO.Delete(id);
+                int result = await releaseBO.Delete(id);
                 if (result == 1)
                 {
                     return NoContent();

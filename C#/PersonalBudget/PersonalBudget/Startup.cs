@@ -43,6 +43,9 @@ namespace PersonalBudget
             });
 
             services.AddTransient<Business.v1.ICategorieBO, Business.v1.Objects.CategorieBO>();
+            services.AddTransient<Business.v1.IReleaseBO, Business.v1.Objects.ReleaseBO>();
+            services.AddTransient<Business.v1.ITransactionBO, Business.v1.Objects.TransactionBO>();
+            services.AddTransient<Business.v1.ITransactionTypeBO, Business.v1.Objects.TransactionTypeBO>();
 
             services.AddControllers();
         }

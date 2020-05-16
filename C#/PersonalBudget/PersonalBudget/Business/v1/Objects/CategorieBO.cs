@@ -14,7 +14,7 @@ namespace PersonalBudget.Business.v1.Objects
         private PersonalBudgetContext _context;
         private PersonalBudgetRplContext _contextRpl;
 
-        public CategorieBO(PersonalBudgetContext context, PersonalBudgetRplContext contextRpl)
+        public CategorieBO(PersonalBudgetContext context, PersonalBudgetRplContext contextRpl=null)
         {
             _context = context;
             _contextRpl = contextRpl;
@@ -31,11 +31,11 @@ namespace PersonalBudget.Business.v1.Objects
                 Categorie categorie = null;
                 if (!ContextRplExists())
                 {
-                    categorie = await _context.Categorie.AsNoTracking().FirstOrDefaultAsync(c => c.Id.Equals(id));
+                    categorie = await _context.Categorie.AsNoTracking().Where(t => t.Id.Equals(id)).FirstOrDefaultAsync();
                 }
                 else
                 {
-                    categorie = await _contextRpl.Categorie.AsNoTracking().FirstOrDefaultAsync(c => c.Id.Equals(id));
+                    categorie = await _contextRpl.Categorie.AsNoTracking().Where(t => t.Id.Equals(id)).FirstOrDefaultAsync();
                 }
                 if (categorie == null)
                 {
@@ -109,19 +109,25 @@ namespace PersonalBudget.Business.v1.Objects
             }
         }
 
-        public async Task<int> Update(string id, Categorie categorie)
+        public async Task<int> Update(string id, Categorie categorieUpdate)
         {
             try
             {
-                if (id != categorie.Id)
+                if (id != categorieUpdate.Id)
                 {
                     throw new Exception("Different id");
                 }
+                var categorie = await GetById(id);
+                if (categorie == null)
+                {
+                    throw new NotFoundException();
+                }
 
-                ValidateFieldsEmpty(categorie);
+                ValidateFieldsEmpty(categorieUpdate);
 
-                _context.Entry(categorie).State = EntityState.Modified;
+                _context.Entry<Categorie>(categorieUpdate).State = EntityState.Modified;
                 int result = await _context.SaveChangesAsync();
+                _context.Entry<Categorie>(categorieUpdate).State = EntityState.Detached;
                 return result;
             }
             catch (DbUpdateConcurrencyException e) when (!CategorieExists(id))
@@ -151,7 +157,7 @@ namespace PersonalBudget.Business.v1.Objects
                 {
                     throw new NotFoundException("Categorie not found");
                 }
-                _context.Entry(categorie).State = EntityState.Detached;
+                _context.Entry<Categorie>(categorie).State = EntityState.Detached;
                 _context.Categorie.Remove(categorie);
                 int result = await _context.SaveChangesAsync();
                 return result;

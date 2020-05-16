@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Common;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonalBudget.Business.v1;
 using PersonalBudget.Models;
@@ -13,18 +10,18 @@ namespace PersonalBudget.Controllers.v1
     [ApiController]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
-    public class CategorieController : ControllerBase
+    public class TransactionController : ControllerBase
     {
-        // GET: api/Categorie/userId
+        // GET: api/transaction/userId
         [HttpGet("{userId}")]
-        public async Task<ActionResult<IEnumerable<Categorie>>> GetByUserId(
-            [FromServices]ICategorieBO categorieBO,
+        public async Task<ActionResult<IEnumerable<Transaction>>> GetByUserId(
+            [FromServices]ITransactionBO transactionBO,
             string userId)
         {
             try
             {
-                var categories = await categorieBO.GetByUserId(userId);
-                return Ok(categories);
+                var transactions = await transactionBO.GetByUserId(userId, 20);
+                return Ok(transactions);
             }
             catch (Exceptions.NotFoundException e)
             {
@@ -36,15 +33,15 @@ namespace PersonalBudget.Controllers.v1
             }
         }
 
-        // POST: api/Categorie
+        // POST: api/transaction
         [HttpPost]
         public async Task<IActionResult> Post(
-            [FromServices]ICategorieBO categorieBO,
-            [FromBody]Categorie categorie)
+            [FromServices]ITransactionBO transactionBO,
+            [FromBody]Transaction transaction)
         {
             try
             {
-                int result = await categorieBO.Save(categorie);
+                int result = await transactionBO.Save(transaction);
                 if (result == 1)
                 {
                     return CreatedAtAction(null, null);
@@ -64,16 +61,16 @@ namespace PersonalBudget.Controllers.v1
             }
         }
 
-        // PUT: api/Categorie/id
+        // PUT: api/transaction/id
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(
-            [FromServices]ICategorieBO categorieBO,
+            [FromServices]ITransactionBO transactionBO,
             string id,
-            [FromBody]Categorie categorie)
+            [FromBody]Transaction transaction)
         {
             try
             {
-                int result = await categorieBO.Update(id, categorie);
+                int result = await transactionBO.Update(id, transaction);
                 if (result == 1)
                 {
                     return NoContent();
@@ -101,15 +98,15 @@ namespace PersonalBudget.Controllers.v1
             }
         }
 
-        // DELETE: api/ApiWithActions/id
+        // DELETE: api/transaction/id
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(
-            [FromServices]ICategorieBO categorieBO,
+            [FromServices]ITransactionBO transactionBO,
             string id)
         {
             try
             {
-                int result = await categorieBO.Delete(id);
+                int result = await transactionBO.Delete(id);
                 if (result == 1)
                 {
                     return NoContent();

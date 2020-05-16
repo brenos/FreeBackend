@@ -158,13 +158,13 @@ namespace PersonalBudget.Models
                     .HasColumnName("transactionId")
                     .HasColumnType("varchar(50)");
 
-                entity.Property(e => e.MonthRef).HasColumnName("monthRef");
+                entity.Property(e => e.MonthRef).IsRequired();
 
                 entity.Property(e => e.Amount)
                     .HasColumnName("amount")
                     .HasColumnType("decimal(18,2)");
 
-                entity.Property(e => e.YearRef).HasColumnName("yearRef");
+                entity.Property(e => e.YearRef).IsRequired();
 
                 entity.HasOne(d => d.Transaction)
                     .WithMany(p => p.Releases)

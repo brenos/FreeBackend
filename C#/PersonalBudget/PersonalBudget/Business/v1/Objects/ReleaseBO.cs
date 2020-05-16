@@ -14,7 +14,7 @@ namespace PersonalBudget.Business.v1.Objects
         private PersonalBudgetContext _context;
         private PersonalBudgetRplContext _contextRpl;
 
-        public ReleaseBO(PersonalBudgetContext context, PersonalBudgetRplContext contextRpl)
+        public ReleaseBO(PersonalBudgetContext context, PersonalBudgetRplContext contextRpl=null)
         {
             _context = context;
             _contextRpl = contextRpl;
@@ -31,11 +31,11 @@ namespace PersonalBudget.Business.v1.Objects
                 Release release = null;
                 if (!ContextRplExists())
                 {
-                    release = await _context.Release.AsNoTracking().FirstOrDefaultAsync(r => r.Id.Equals(id));
+                    release = await _context.Release.AsNoTracking().Where(t => t.Id.Equals(id)).FirstOrDefaultAsync();
                 }
                 else
                 {
-                    release = await _contextRpl.Release.AsNoTracking().FirstOrDefaultAsync(r => r.Id.Equals(id));
+                    release = await _contextRpl.Release.AsNoTracking().Where(t => t.Id.Equals(id)).FirstOrDefaultAsync();
                 }
                 if (release == null)
                 {
@@ -94,7 +94,7 @@ namespace PersonalBudget.Business.v1.Objects
             {
                 ValidateFieldsEmpty(release);
                 
-                release.Id = System.Guid.NewGuid().ToString();
+                release.Id = Guid.NewGuid().ToString();
                 _context.Release.Add(release);
                 int result = await _context.SaveChangesAsync();
 
@@ -110,19 +110,25 @@ namespace PersonalBudget.Business.v1.Objects
             }
         }
 
-        public async Task<int> Update(string id, Release release)
+        public async Task<int> Update(string id, Release releaseUpdate)
         {
             try
             {
-                if (id != release.Id)
+                if (id != releaseUpdate.Id)
                 {
                     throw new Exception("Different id");
                 }
+                var release = await GetById(id);
+                if (release == null)
+                {
+                    throw new NotFoundException();
+                }
 
-                ValidateFieldsEmpty(release);
+                ValidateFieldsEmpty(releaseUpdate);
 
-                _context.Entry(release).State = EntityState.Modified;
+                _context.Entry<Release>(releaseUpdate).State = EntityState.Modified;
                 int result = await _context.SaveChangesAsync();
+                _context.Entry<Release>(releaseUpdate).State = EntityState.Detached;
                 return result;
             }
             catch (DbUpdateConcurrencyException e) when (!ReleaseExists(id))
@@ -152,7 +158,7 @@ namespace PersonalBudget.Business.v1.Objects
                 {
                     throw new NotFoundException("Release not found");
                 }
-                _context.Entry(release).State = EntityState.Detached;
+                _context.Entry<Release>(release).State = EntityState.Detached;
                 _context.Release.Remove(release);
                 int result = await _context.SaveChangesAsync();
                 return result;

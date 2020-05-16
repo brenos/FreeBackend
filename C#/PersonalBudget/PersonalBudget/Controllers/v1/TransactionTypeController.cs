@@ -13,18 +13,17 @@ namespace PersonalBudget.Controllers.v1
     [ApiController]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
-    public class CategorieController : ControllerBase
+    public class TransactionTypeController : ControllerBase
     {
-        // GET: api/Categorie/userId
-        [HttpGet("{userId}")]
-        public async Task<ActionResult<IEnumerable<Categorie>>> GetByUserId(
-            [FromServices]ICategorieBO categorieBO,
-            string userId)
+        // GET: api/transactiontype
+        [HttpGet()]
+        public async Task<ActionResult<IEnumerable<TransactionType>>> GetAll(
+            [FromServices]ITransactionTypeBO ttypeBO)
         {
             try
             {
-                var categories = await categorieBO.GetByUserId(userId);
-                return Ok(categories);
+                var ttypes = await ttypeBO.GetAll();
+                return Ok(ttypes);
             }
             catch (Exceptions.NotFoundException e)
             {
@@ -36,15 +35,36 @@ namespace PersonalBudget.Controllers.v1
             }
         }
 
-        // POST: api/Categorie
-        [HttpPost]
-        public async Task<IActionResult> Post(
-            [FromServices]ICategorieBO categorieBO,
-            [FromBody]Categorie categorie)
+        // GET: api/transactiontype/id
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<TransactionType>>> GetById(
+            [FromServices]ITransactionTypeBO ttypeBO,
+            string id)
         {
             try
             {
-                int result = await categorieBO.Save(categorie);
+                var ttypes = await ttypeBO.GetById(id);
+                return Ok(ttypes);
+            }
+            catch (Exceptions.NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        // POST: api/transactiontype
+        [HttpPost]
+        public async Task<IActionResult> Post(
+            [FromServices]ITransactionTypeBO transactionTypeBO,
+            [FromBody]TransactionType transactionType)
+        {
+            try
+            {
+                int result = await transactionTypeBO.Save(transactionType);
                 if (result == 1)
                 {
                     return CreatedAtAction(null, null);
@@ -64,16 +84,16 @@ namespace PersonalBudget.Controllers.v1
             }
         }
 
-        // PUT: api/Categorie/id
+        // PUT: api/transactiontype/id
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(
-            [FromServices]ICategorieBO categorieBO,
+            [FromServices]ITransactionTypeBO transactionTypeBO,
             string id,
-            [FromBody]Categorie categorie)
+            [FromBody]TransactionType transactionType)
         {
             try
             {
-                int result = await categorieBO.Update(id, categorie);
+                int result = await transactionTypeBO.Update(id, transactionType);
                 if (result == 1)
                 {
                     return NoContent();
@@ -101,15 +121,15 @@ namespace PersonalBudget.Controllers.v1
             }
         }
 
-        // DELETE: api/ApiWithActions/id
+        // DELETE: api/transactiontype/id
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(
-            [FromServices]ICategorieBO categorieBO,
+            [FromServices]ITransactionTypeBO transactionTypeBO,
             string id)
         {
             try
             {
-                int result = await categorieBO.Delete(id);
+                int result = await transactionTypeBO.Delete(id);
                 if (result == 1)
                 {
                     return NoContent();
