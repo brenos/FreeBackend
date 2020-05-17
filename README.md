@@ -21,7 +21,5 @@ API's free disponibilizadas publicamente para uso particular ou profissional.
 ## Projetos
 - [Personal Budget](https://github.com/brenos/FreeBackend/tree/master/C%23/PersonalBudget)
 
-<br/>
-<br/>
 
 ###### Agradecimento especial ao amigo [Luiz Eduardo Martins](https://github.com/luuizeduardo) por me icentivar e me ajudar sempre com os testes.
