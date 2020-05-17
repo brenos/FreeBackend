@@ -1,20 +1,39 @@
-﻿default
-Startup.cs onde fica a conexão com o banco de dados
+# Personal Budget Project
 
-Usei o ApiVersioning
+## Descrição
 
+Projeto com a proposta de ser uma api de Orçamento Pessoal.
 
-mac / linux
-dotnet build - baixa pacotes
+## Informações Técnicas
+
+Api versionada conectando ao Banco de Dados, podendo usar uma conexão de réplica para as consultas.
+
+## Install
+
+#### Mac / Linux
+dotnet build
+<br/>
 dotnet ef database update
-*alterar context, adicionar ou remover colunas ou tabelas
-	dotnet ef migrations add AddProductReviews
 
+Obs.: Alterar context, adicionar ou remover colunas ou tabelas
+- dotnet ef migrations add AddColumnTable
 
-windows
+#### Windows (Command line)
 update-database
-*alterar context, adicionar ou remover colunas ou tabelas
-	add-migration AddProductReviews
 
-referencias
+Obs.: Alterar context, adicionar ou remover colunas ou tabelas
+- add-migration AddColumnTable
+
+## Stack
+- .Net Core 3.1
+- Entity Framework
+- ApiVersioning
+- NUnit
+
+
+## Referencias
+https://docs.microsoft.com/en-us/dotnet/core/introduction
+<br/>
 https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli
+<br/>
+https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-nunit
