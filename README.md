@@ -8,7 +8,7 @@ API's free disponibilizadas publicamente para uso particular ou profissional.
 - C#
 
 #### Frameworks
-- .Net Core 
+- .Net Core
 - Entity Framework
 - NUnit
 - XUnit
@@ -19,7 +19,7 @@ API's free disponibilizadas publicamente para uso particular ou profissional.
 - Redis
 
 ## Projetos
-- [Personal Budget](https://github.com/brenos/FreeBackend/tree/master/C%23/PersonalBudget)
+- [Personal Budget](https://github.com/brenos/FreeBackend/tree/master/dotnet_core/PersonalBudget)
 
 
 ###### Agradecimento especial ao amigo [Luiz Eduardo Martins](https://github.com/luuizeduardo) por me icentivar e me ajudar sempre com os testes.
