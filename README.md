@@ -18,7 +18,7 @@ API's free disponibilizadas publicamente para uso particular ou profissional.
 - Document DB
 - Redis
 
-## Projetos
+## API's
 - [Personal Budget](https://github.com/brenos/FreeBackend/tree/master/dotnet_core/PersonalBudget)
 
 
