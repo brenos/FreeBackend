@@ -1,7 +1,7 @@
 # FreeBackend
 
-Este repositório irá conter vários backends gratuitos com intuito de usar para estudos, projetos pessoais e até projetos profissionais.
+Vou alimentar esse repositório com API's gratuitas com intuito de usar para estudos, projetos pessoais e até projetos profissionais.
 
-Obs.: Solicito que quando for usado, enviar uma email informando o tipo de uso, para que possamos metrificar. 
+Caso precisem usar, podem baixar à vontade. 
 
 Obrigado!
