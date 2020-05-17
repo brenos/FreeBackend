@@ -14,7 +14,7 @@ API's free disponibilizadas publicamente para uso particular ou profissional.
 - XUnit
 
 #### Base de Dados
-- Banco de Dados
+- MySQL, Postgre, SQL Server
 - Document DB
 - Redis
 
