@@ -1,0 +1,812 @@
+{
+	"info": {
+		"_postman_id": "4b43d8e2-3ccb-4e15-b029-f6ac88a133e0",
+		"name": "PersonalBudget",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Categorie",
+			"item": [
+				{
+					"name": "GetByUserId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "575bc887-f876-4c31-b792-ed089188c929",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44364/api/v1/categorie/123",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"categorie",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "05418d2c-9f1b-4dc3-9996-7bdf041835be",
+								"exec": [
+									"pm.test(\"Status code is 20\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Test\",\n\t\"UserId\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44364/api/v1/categorie",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"categorie"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2d1ed52a-4738-4c74-857b-6d9ece8a4f3e",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Id\": \"ea5fe38d-1351-49fe-8740-627a71f95082\",\n\t\"Name\": \"Test 1\",\n\t\"UserId\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44364/api/v1/categorie/ea5fe38d-1351-49fe-8740-627a71f95082",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"categorie",
+								"ea5fe38d-1351-49fe-8740-627a71f95082"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ce00a36f-8b2c-4250-bac4-a67092d31444",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44364/api/v1/categorie/ea5fe38d-1351-49fe-8740-627a71f95082",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"categorie",
+								"ea5fe38d-1351-49fe-8740-627a71f95082"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Release",
+			"item": [
+				{
+					"name": "GetByTransactionId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ce940d64-248b-424e-bb5b-a08007b3206c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44364/api/v1/release/5bc36813-9436-43ad-bad4-7e18ee67e674",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"release",
+								"5bc36813-9436-43ad-bad4-7e18ee67e674"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4dad605c-8089-41e2-a8de-24ac59a430ab",
+								"exec": [
+									"pm.test(\"Status code is 20\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"YearRef\": 2020,\n\t\"MonthRef\": 6,\n\t\"Amount\": 50,\n\t\"TransactionId\": \"5bc36813-9436-43ad-bad4-7e18ee67e674\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44364/api/v1/release",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"release"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5003fef1-aeb3-4f22-9eaa-5b3dbf88f5fc",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": \"529a7642-a80c-4d0e-b724-e9180cd6c8a7\",\r\n        \"yearRef\": 2020,\r\n        \"monthRef\": 6,\r\n        \"amount\": 51.00,\r\n        \"transactionId\": \"5bc36813-9436-43ad-bad4-7e18ee67e674\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44364/api/v1/release/529a7642-a80c-4d0e-b724-e9180cd6c8a7",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"release",
+								"529a7642-a80c-4d0e-b724-e9180cd6c8a7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "71c0920a-3d3a-4bba-a4c0-b4cf93397bf1",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44364/api/v1/release/529a7642-a80c-4d0e-b724-e9180cd6c8a7",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"release",
+								"529a7642-a80c-4d0e-b724-e9180cd6c8a7"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "GetByUserId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fc260d28-b888-481f-beba-6a308f902cc3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44364/api/v1/transaction/123",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "40801a95-e5e7-42b3-9d26-f87826ee35b3",
+								"exec": [
+									"pm.test(\"Status code is 20\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Description\": \"Test2\",\n    \"DtTransaction\": \"2020-05-16T16:00:00.000\",\n\t\"MonthRef\": 5,\n\t\"YearRef\": 2020,\n\t\"Amount\": 150,\n\t\"UserId\": \"123\",\n\t\"CategorieId\": \"130faafa-46fb-441b-bb09-f2f66dacad17\",\n\t\"TypeId\": \"e837bbac-0a79-4ee1-9b60-0bfcc8979f44\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44364/api/v1/transaction",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3cfea03e-8aa3-4560-b7e9-86f3428bdc33",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Id\": \"5bc36813-9436-43ad-bad4-7e18ee67e674\",\n    \"Description\": \"Test\",\n    \"DtTransaction\": \"2020-05-16T13:34:00.000\",\n\t\"MonthRef\": 5,\n\t\"YearRef\": 2020,\n\t\"Amount\": 100,\n\t\"UserId\": \"123\",\n\t\"CategorieId\": \"130faafa-46fb-441b-bb09-f2f66dacad17\",\n\t\"TypeId\": \"5c338f67-3096-48eb-9ba6-b1f47fa529ad\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44364/api/v1/transaction/5bc36813-9436-43ad-bad4-7e18ee67e674",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"5bc36813-9436-43ad-bad4-7e18ee67e674"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f3a4b283-9148-4baa-969c-2aa2798707f9",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Id\": \"5bc36813-9436-43ad-bad4-7e18ee67e674\",\n    \"Description\": \"Test\",\n    \"DtTransaction\": \"2020-05-16T13:34:00.000\",\n\t\"MonthRef\": 5,\n\t\"YearRef\": 2020,\n\t\"Amount\": 100,\n\t\"UserId\": \"123\",\n\t\"CategorieId\": \"130faafa-46fb-441b-bb09-f2f66dacad17\",\n\t\"TypeId\": \"5c338f67-3096-48eb-9ba6-b1f47fa529ad\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44364/api/v1/transaction/3a92f5fd-1b91-451c-8958-1dc7971c0a1e",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"3a92f5fd-1b91-451c-8958-1dc7971c0a1e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "484cb92f-9a1f-453f-a776-b541b72708db",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44364/api/v1/transaction/63e93423-eec6-467a-a87e-ffc674a0244a",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"63e93423-eec6-467a-a87e-ffc674a0244a"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Transaction Type",
+			"item": [
+				{
+					"name": "GetAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "55047175-883b-4f7e-ae12-0f670ff4cc36",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44364/api/v1/transactiontype",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"transactiontype"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c2c4f235-acea-4335-8119-3d3904856fab",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44364/api/v1/transactiontype/5c338f67-3096-48eb-9ba6-b1f47fa529ad",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"transactiontype",
+								"5c338f67-3096-48eb-9ba6-b1f47fa529ad"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53273740-f3aa-4e41-857e-2caf269489cb",
+								"exec": [
+									"pm.test(\"Status code is 20\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Expense\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44364/api/v1/transactiontype",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"transactiontype"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "082eb595-4ae2-4485-89d4-930e01c2a6ec",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Id\": \"5c338f67-3096-48eb-9ba6-b1f47fa529ad\",\n\t\"Name\": \"Expense\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44364/api/v1/transactiontype/5c338f67-3096-48eb-9ba6-b1f47fa529ad",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"transactiontype",
+								"5c338f67-3096-48eb-9ba6-b1f47fa529ad"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b698953d-0c59-4427-84c1-0c2c7850c2e6",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44364/api/v1/transactiontype/5b8fc82e-ce65-4d3f-b0c4-e3c32b2367bf",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44364",
+							"path": [
+								"api",
+								"v1",
+								"transactiontype",
+								"5b8fc82e-ce65-4d3f-b0c4-e3c32b2367bf"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
