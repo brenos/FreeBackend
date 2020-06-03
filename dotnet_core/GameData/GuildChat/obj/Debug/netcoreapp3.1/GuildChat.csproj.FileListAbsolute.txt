@@ -1,0 +1,10 @@
+D:\Projects\FreeBackend\dotnet_core\GameData\GuildChat\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\Projects\FreeBackend\dotnet_core\GameData\GuildChat\bin\Debug\netcoreapp3.1\appsettings.json
+D:\Projects\FreeBackend\dotnet_core\GameData\GuildChat\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+D:\Projects\FreeBackend\dotnet_core\GameData\GuildChat\obj\Debug\netcoreapp3.1\GuildChat.csprojAssemblyReference.cache
+D:\Projects\FreeBackend\dotnet_core\GameData\GuildChat\obj\Debug\netcoreapp3.1\GuildChat.AssemblyInfoInputs.cache
+D:\Projects\FreeBackend\dotnet_core\GameData\GuildChat\obj\Debug\netcoreapp3.1\GuildChat.AssemblyInfo.cs
+D:\Projects\FreeBackend\dotnet_core\GameData\GuildChat\obj\Debug\netcoreapp3.1\GuildChat.RazorTargetAssemblyInfo.cache
+D:\Projects\FreeBackend\dotnet_core\GameData\GuildChat\obj\Debug\netcoreapp3.1\staticwebassets\GuildChat.StaticWebAssets.Manifest.cache
+D:\Projects\FreeBackend\dotnet_core\GameData\GuildChat\obj\Debug\netcoreapp3.1\staticwebassets\GuildChat.StaticWebAssets.xml
+D:\Projects\FreeBackend\dotnet_core\GameData\GuildChat\bin\Debug\netcoreapp3.1\GuildChat.exe

@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayerData", "PlayerData\PlayerData.csproj", "{84CD71A1-7E10-45A5-AB92-FC37D12FF8A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildData", "GuildData\GuildData.csproj", "{93D49698-D57C-423E-9198-F88CB4FAC5FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildChat", "GuildChat\GuildChat.csproj", "{B67705F1-8752-43C7-A2EA-025EAA01C836}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84CD71A1-7E10-45A5-AB92-FC37D12FF8A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84CD71A1-7E10-45A5-AB92-FC37D12FF8A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84CD71A1-7E10-45A5-AB92-FC37D12FF8A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84CD71A1-7E10-45A5-AB92-FC37D12FF8A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93D49698-D57C-423E-9198-F88CB4FAC5FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93D49698-D57C-423E-9198-F88CB4FAC5FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93D49698-D57C-423E-9198-F88CB4FAC5FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93D49698-D57C-423E-9198-F88CB4FAC5FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B67705F1-8752-43C7-A2EA-025EAA01C836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B67705F1-8752-43C7-A2EA-025EAA01C836}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B67705F1-8752-43C7-A2EA-025EAA01C836}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B67705F1-8752-43C7-A2EA-025EAA01C836}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2ACFC9D-66F4-4377-A751-481AA368F9BB}
+	EndGlobalSection
+EndGlobal
