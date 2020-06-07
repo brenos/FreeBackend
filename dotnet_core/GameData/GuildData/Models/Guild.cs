@@ -12,7 +12,7 @@ namespace GuildData.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public List<Guid> Players { get; set; }
-        public Guid Owner { get; set; }
+        public string Owner { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }
