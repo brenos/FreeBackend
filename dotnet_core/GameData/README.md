@@ -9,6 +9,7 @@ A união será em forma de guildas, que terá um chat realtime para troca de men
 - .Net Core 3.1
 - SignalR Core
 - ApiVersioning
+- Swagger
 - MongoDB
 - XUnit
 
