@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using GameException;
 using Microsoft.AspNetCore.Mvc;
 using GuildData.Business.v1;
-using GuildData.Models.v1;
+using GameModels.Mongo.v1;
 using Microsoft.AspNetCore.Http;
 
 namespace GuildData.Controllers.v1

@@ -4,8 +4,7 @@ using GameException;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PlayerData.Business.v1;
-using PlayerData.Models.v1;
-using PlayerData.Services.v1;
+using GameModels.Mongo.v1;
 
 namespace PlayerData.Controllers.v1
 {

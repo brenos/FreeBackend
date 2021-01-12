@@ -1,10 +1,10 @@
 ﻿using GameException;
 using MongoDB.Driver;
-using GuildData.Models.v1;
-using GuildData.Services.v1;
+using GameModels.Mongo.v1;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using GameServices.v1.Database;
 
 namespace GuildData.Business.v1
 {

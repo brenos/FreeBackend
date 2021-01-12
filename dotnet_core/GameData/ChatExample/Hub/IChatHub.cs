@@ -1,4 +1,4 @@
-﻿using ChatClient.Models.v1;
+﻿using GameModels.Mongo.v1;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,5 +9,7 @@ namespace ChatExample.Hub
     public interface IChatHub
     {
         public Task<string> ConnectAsync(Action<Message> ReceiveMessage);
+
+        public Task SendMessage(Message message);
     }
 }

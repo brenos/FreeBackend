@@ -1,5 +1,4 @@
-﻿using GuildChat.Models.v1;
-using ChatClient.Chat.v1;
+﻿using GameModels.Mongo.v1;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 using GuildChat.Business.v1;
@@ -10,34 +9,56 @@ namespace GuildChat.Hubs.v1
 {
     public class ChatHub : Hub<IChatClient>
     {
-        /**private IMessageBusiness _messageBusiness;
+        private IMessageBusiness _messageBusiness;
+        private IChatBusiness _chatBusiness;
 
-        public ChatHub(IMessageBusiness messageBusiness)
+        public ChatHub(IMessageBusiness messageBusiness, IChatBusiness chatBusiness)
         {
             _messageBusiness = messageBusiness;
-        }**/
-
-        public ChatHub() { }
+            _chatBusiness = chatBusiness;
+        }
 
         public override Task OnConnectedAsync()
         {
+            string a = "";
             return base.OnConnectedAsync();
         }
 
-        public async Task AddToGroup(string playerId, string groupId)
+        public async Task AddToGroup(string groupId)
         {
-            await Groups.AddToGroupAsync(playerId, groupId);
+            try
+            {
+                await Groups.AddToGroupAsync(this.Context.ConnectionId, groupId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
-        /**public async Task SendMessage(Message message)
+        public async Task SendMessage(Message message)
         {
             try
             {
                 //Validar Player
+                Player player = await _chatBusiness.GetPlayerById(message.PlayerId);
+                Guild guild = await _chatBusiness.GetGuildById(message.GuildId);
+                if (!_chatBusiness.IsValidChatPlayer(player, guild))
+                {
+                    throw new Exception("Player not valid!");
+                }
+
+                //Preencher dados da mensagem
+                message.PlayerName = player.Name;
+                message.SendAt = DateTime.UtcNow;
+                
                 //Validar chat
                 Message messageSaved = await _messageBusiness.Save(message);
-                //await Clients.Group(message.GuildId).ReceiveMessage(message);
-                await Clients.All.ReceiveMessage(message);
+                await Clients.Group(message.GuildId).ReceiveMessage(message);
+            }
+            catch (NotFoundException ne)
+            {
+                throw new NotFoundException(ne.Message);
             }
             catch (ParameterException pe)
             {
@@ -51,6 +72,6 @@ namespace GuildChat.Hubs.v1
             {
                 throw new Exception(e.Message);
             }
-        }**/
+        }
     }
 }

@@ -1,5 +1,5 @@
-﻿using ChatClient.Models.v1;
-using ChatExample.Hub;
+﻿using ChatExample.Hub;
+using GameModels.Mongo.v1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,12 +38,29 @@ namespace ChatExample
                 LblStatusConnection.Content = "Connecting to server!";
                 string statusConn = await _chatHub.ConnectAsync((message) => ReceiveMessage(message));
                 LblStatusConnection.Content = statusConn;
+                BtnConnect.IsEnabled = false;
+                BtnSendMessage.IsEnabled = true;
             }
         }
 
         private void BtnSendMessage_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                Message message = new Message
+                {
+                    PlayerId = TxtPlayerId.Text,
+                    GuildId = TxtGuildId.Text,
+                    Text = TxtMssg.Text
+                };
+                _chatHub.SendMessage(message);
+                TxtMssg.Text = "";
+            }
+            catch (Exception ex)
+            {
+                openPopup(ex.Message);
+            }
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -109,10 +126,16 @@ namespace ChatExample
             this.Dispatcher.Invoke(() =>
             {
                 ListBoxItem itm = new ListBoxItem();
-                itm.Content = $"{message.PlayerId}: {message.Text}";
+                itm.Content = $"{message.PlayerName}: {message.Text}";
 
                 listBox.Items.Add(itm);
             });
+        }
+        
+        public void OnDisconnect()
+        {
+            BtnConnect.IsEnabled = true;
+            BtnSendMessage.IsEnabled = false;
         }
     }
 }

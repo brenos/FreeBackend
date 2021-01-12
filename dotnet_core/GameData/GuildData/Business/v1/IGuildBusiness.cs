@@ -1,4 +1,4 @@
-﻿using GuildData.Models.v1;
+﻿using GameModels.Mongo.v1;
 using System.Threading.Tasks;
 
 namespace GuildData.Business.v1

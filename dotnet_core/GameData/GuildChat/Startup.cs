@@ -1,6 +1,4 @@
 using GuildChat.Hubs.v1;
-using GuildChat.Models.v1;
-using GuildChat.Services.v1;
 using GuildChat.Business.v1;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using Microsoft.AspNetCore.SignalR;
+using GameServices.v1;
+using GameServices.v1.Database;
+using GameModels.Mongo.v1;
 
 namespace GuildChat
 {
@@ -25,10 +26,10 @@ namespace GuildChat
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<GuildChatDatabaseSettings>(Configuration.GetSection(nameof(GuildChatDatabaseSettings)));
+            services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
 
-            services.AddSingleton<IGuildChatDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<GuildChatDatabaseSettings>>().Value);
+            services.AddSingleton<IDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
             services.AddApiVersioning(p =>
             {
@@ -44,6 +45,8 @@ namespace GuildChat
             });
 
             services.AddSingleton<IMongoDB<Message>, MongoDB<Message>>();
+            services.AddSingleton<IPlayerService, PlayerService>();
+            services.AddSingleton<IGuildService, GuildService>();
             services.AddSingleton<IMessageBusiness, MessageBusiness>();
             services.AddSingleton<IChatBusiness, ChatBusiness>();
 

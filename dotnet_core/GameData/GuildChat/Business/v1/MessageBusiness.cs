@@ -3,8 +3,8 @@ using MongoDB.Driver;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using GuildChat.Models.v1;
-using GuildChat.Services.v1;
+using GameModels.Mongo.v1;
+using GameServices.v1.Database;
 
 namespace GuildChat.Business.v1
 {
@@ -26,7 +26,7 @@ namespace GuildChat.Business.v1
             try
             {
                 var filter = new FilterDefinitionBuilder<Message>().Eq(m => m.Id, id);
-                Message message = await _mongoDB.GetById(filter);
+                Message message = await _mongoDB.GetByFilter(filter);
                 if (message == null)
                 {
                     throw new NotFoundException("Message nor found");
@@ -53,7 +53,7 @@ namespace GuildChat.Business.v1
             try
             {
                 var filter = new FilterDefinitionBuilder<Message>().Eq(c => c.GuildId, guildId);
-                IEnumerable<Message> messages = await _mongoDB.GetLastTweenty(filter);
+                IEnumerable<Message> messages = await _mongoDB.GetEnumerableByFilter(filter);
                 if (messages == null)
                 {
                     messages = new List<Message>();

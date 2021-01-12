@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GuildChat.Models.v1;
+using GameModels.Mongo.v1;
 
 namespace GuildChat.Business.v1
 {
@@ -11,6 +11,9 @@ namespace GuildChat.Business.v1
     {
         public Task AddToGroup(string playerId, string guildId);
         public Task RemoveFromGroup(string playerId, string guildId);
-        public Task SendMessage(Message message);
+        public Task SendMessageToGuild(Message message);
+        public Task<Player> GetPlayerById(string playerId);
+        public Task<Guild> GetGuildById(string guildId);
+        public bool IsValidChatPlayer(Player player, Guild guild);
     }
 }

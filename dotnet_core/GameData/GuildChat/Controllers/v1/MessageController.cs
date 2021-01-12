@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GameException;
-using GuildChat.Models.v1;
+using GameModels.Mongo.v1;
 using GuildChat.Business.v1;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;

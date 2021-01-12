@@ -1,4 +1,4 @@
-﻿using PlayerData.Models.v1;
+﻿using GameModels.Mongo.v1;
 using System.Threading.Tasks;
 
 namespace PlayerData.Business.v1

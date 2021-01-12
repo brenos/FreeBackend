@@ -1,4 +1,4 @@
-﻿using GuildChat.Models.v1;
+﻿using GameModels.Mongo.v1;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

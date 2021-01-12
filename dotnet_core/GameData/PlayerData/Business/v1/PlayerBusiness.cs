@@ -1,10 +1,10 @@
 ﻿using GameException;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using MongoDB.Driver;
-using PlayerData.Models.v1;
-using PlayerData.Services.v1;
+using GameModels.Mongo.v1;
 using System;
 using System.Threading.Tasks;
+using GameServices.v1.Database;
 
 namespace PlayerData.Business.v1
 {

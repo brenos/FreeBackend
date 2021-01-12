@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ChatClient.Chat.v1;
-using ChatClient.Models.v1;
+using GameModels.Mongo.v1;
 using Microsoft.AspNetCore.SignalR.Client;
 using System.Threading.Tasks;
 
@@ -10,7 +9,7 @@ namespace ChatExample.Hub
 {
     public class ChatHub : IChatHub
     {
-        HubConnection connection;
+        HubConnection _connection;
         string _uri;
         string _playerId;
         string _guildId;
@@ -26,47 +25,32 @@ namespace ChatExample.Hub
         {
             try
             {
-                connection = new HubConnectionBuilder()
+                _connection = new HubConnectionBuilder()
                     .WithUrl(new Uri(_uri))
                     .WithAutomaticReconnect()
                     .Build();
 
-                connection.On<Message>("ReceiveMessage", (message) => ReceiveMessage(message));
+                _connection.On<Message>("ReceiveMessage", (message) => ReceiveMessage(message));
 
-                await connection.StartAsync();
-                await AddToGroup(_playerId, _guildId);
+                await _connection.StartAsync();
+                await AddToGroup(_guildId);
 
                 return "Connection started!";
-
-                //messagesList.Items.Add("Connection started");
-                //connectButton.IsEnabled = false;
-                //sendButton.IsEnabled = true;
             }
             catch (Exception ex)
             {
                 return ex.Message;
-                //messagesList.Items.Add(ex.Message);
             }
         }
 
-        private async Task AddToGroup(string playerId, string guildId)
+        private async Task AddToGroup(string guildId)
         {
-            await connection.InvokeAsync("AddToGroup", playerId, guildId);
+            await _connection.InvokeAsync("AddToGroup", guildId);
         }
 
-        //public void ReceiveMessage(Message message)
-        //{
-        //    Console.WriteLine($"User: {message.PlayerId} - Message: {message.Text}");
-        //}
-
-        //public void ReceiveMessage(Message message)
-        //{
-            //this.Dispatcher.Invoke(() =>
-            //{
-            //   var newMessage = $"{user}: {message}";
-            //    messagesList.Items.Add(newMessage);
-            //});
-            //Console.WriteLine($"User {playerId} added on guildId {guildId}");
-        //}
+        public async Task SendMessage(Message message)
+        {
+            await _connection.InvokeAsync("SendMessage", message);
+        }
     }
 }

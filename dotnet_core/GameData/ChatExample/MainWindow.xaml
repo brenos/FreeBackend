@@ -11,9 +11,9 @@
         
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Label Content="Host" />
-            <TextBox x:Name="TxtHost" Text="https://localhost" VerticalAlignment="Center" Margin="3,0,10,0" Width="120" BorderBrush="Black" />
+            <TextBox x:Name="TxtHost" Text="http://localhost" VerticalAlignment="Center" Margin="3,0,10,0" Width="120" BorderBrush="Black" />
             <Label Content="Port" />
-            <TextBox x:Name="TxtPort" Text="55014" VerticalAlignment="Center" Margin="3,0,10,0" Width="40" BorderBrush="Black" />
+            <TextBox x:Name="TxtPort" Text="54965" VerticalAlignment="Center" Margin="3,0,10,0" Width="40" BorderBrush="Black" />
             <Label Content="Service" />
             <TextBox x:Name="TxtService" Text="chathub" VerticalAlignment="Center" Margin="3,0,10,0" Width="70" BorderBrush="Black" />
         </StackPanel>
@@ -22,7 +22,7 @@
             <Label Content="PlayerId" />
             <TextBox x:Name="TxtPlayerId" Text="" VerticalAlignment="Center" Margin="3,0,10,0" Width="120" BorderBrush="Black" />
             <Label Content="GuildId" />
-            <TextBox x:Name="TxtGuildId" Text="" VerticalAlignment="Center" Margin="3,0,10,0" Width="120" BorderBrush="Black" />
+            <TextBox x:Name="TxtGuildId" Text="bfb17ab5-3ac1-4ee8-8f80-2ade9dccb77a" VerticalAlignment="Center" Margin="3,0,10,0" Width="120" BorderBrush="Black" />
             <Button Name="BtnConnect" Content="Connect" Click="BtnConnect_Click" />
         </StackPanel>
 
@@ -33,15 +33,14 @@
         
         <GroupBox x:Name="groupBox" Header="Send Message" Height="57">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Silver" Margin="0,3,0,0">
-                <Label x:Name="label" Content="Label" VerticalAlignment="Center"/>
+                <Label x:Name="label" Content="Message" VerticalAlignment="Center"/>
                 <TextBox x:Name="TxtMssg" Text="" VerticalAlignment="Center" TextWrapping="Wrap" Width="600" Margin="3,0,10,0" />
-                <Button x:Name="BtnSendMessage" Content="Send" Width="45" Click="BtnSendMessage_Click"/>
+                <Button x:Name="BtnSendMessage" Content="Send" Width="45" Click="BtnSendMessage_Click" IsEnabled="False" />
             </StackPanel>
         </GroupBox>
         
         <GroupBox x:Name="groupBox1" Header="Messages" Height="299">
             <ListBox x:Name="listBox">
-                <ListBoxItem Content="Teste"/>
             </ListBox>
         </GroupBox>
 

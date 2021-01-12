@@ -8,12 +8,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Text.Encodings.Web" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChatClient\ChatClient.csproj" />
     <ProjectReference Include="..\GameException\GameException.csproj" />
+    <ProjectReference Include="..\GameModels\GameModels.csproj" />
+    <ProjectReference Include="..\GameServices\GameServices.csproj" />
   </ItemGroup>
 
 </Project>

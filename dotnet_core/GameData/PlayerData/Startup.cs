@@ -1,3 +1,5 @@
+using GameModels.Mongo.v1;
+using GameServices.v1.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -7,8 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using PlayerData.Business.v1;
-using PlayerData.Models.v1;
-using PlayerData.Services.v1;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace PlayerData
@@ -25,10 +25,10 @@ namespace PlayerData
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<PlayerDatabaseSettings>(Configuration.GetSection(nameof(PlayerDatabaseSettings)));
+            services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
 
-            services.AddSingleton<IPlayerDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<PlayerDatabaseSettings>>().Value);
+            services.AddSingleton<IDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
             services.AddApiVersioning(p =>
             {

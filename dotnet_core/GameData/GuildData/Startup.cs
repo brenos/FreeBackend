@@ -1,6 +1,6 @@
+using GameModels.Mongo.v1;
+using GameServices.v1.Database;
 using GuildData.Business.v1;
-using GuildData.Models.v1;
-using GuildData.Services.v1;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -23,10 +23,10 @@ namespace GuildData
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<GuildDatabaseSettings>(Configuration.GetSection(nameof(GuildDatabaseSettings)));
+            services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
 
-            services.AddSingleton<IGuildDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<GuildDatabaseSettings>>().Value);
+            services.AddSingleton<IDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
             services.AddApiVersioning(p =>
             {
