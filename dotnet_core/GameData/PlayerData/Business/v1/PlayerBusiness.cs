@@ -26,7 +26,16 @@ namespace PlayerData.Business.v1
             try
             {
                 var filter = new FilterDefinitionBuilder<Player>().Eq(p => p.Id, id);
-                return await _mongoDB.GetByFilter(filter);
+                Player player = await _mongoDB.GetByFilter(filter);
+                if (player == null)
+                {
+                    throw new NotFoundException("Player not found");
+                }
+                return player;
+            }
+            catch (NotFoundException ne)
+            {
+                throw ne;
             }
             catch (Exception e)
             {

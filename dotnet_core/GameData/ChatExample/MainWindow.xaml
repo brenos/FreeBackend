@@ -1,0 +1,56 @@
+﻿<Window x:Class="ChatExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChatExample"
+        mc:Ignorable="d"
+        Title="Chat Example" Height="450" Width="800">
+    
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Label Content="Host" />
+            <TextBox x:Name="TxtHost" Text="https://localhost" VerticalAlignment="Center" Margin="3,0,10,0" Width="120" BorderBrush="Black" />
+            <Label Content="Port" />
+            <TextBox x:Name="TxtPort" Text="55014" VerticalAlignment="Center" Margin="3,0,10,0" Width="40" BorderBrush="Black" />
+            <Label Content="Service" />
+            <TextBox x:Name="TxtService" Text="chathub" VerticalAlignment="Center" Margin="3,0,10,0" Width="70" BorderBrush="Black" />
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,3,0,0">
+            <Label Content="PlayerId" />
+            <TextBox x:Name="TxtPlayerId" Text="" VerticalAlignment="Center" Margin="3,0,10,0" Width="120" BorderBrush="Black" />
+            <Label Content="GuildId" />
+            <TextBox x:Name="TxtGuildId" Text="" VerticalAlignment="Center" Margin="3,0,10,0" Width="120" BorderBrush="Black" />
+            <Button Name="BtnConnect" Content="Connect" Click="BtnConnect_Click" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Silver" Margin="0,3,0,0">
+            <Label Content="Status Connections:" FontSize="9" FontFamily="Arial"/>
+            <Label Name="LblStatusConnection" Content="Await connect!" FontSize="9" FontFamily="Arial"  />
+        </StackPanel>
+        
+        <GroupBox x:Name="groupBox" Header="Send Message" Height="57">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Silver" Margin="0,3,0,0">
+                <Label x:Name="label" Content="Label" VerticalAlignment="Center"/>
+                <TextBox x:Name="TxtMssg" Text="" VerticalAlignment="Center" TextWrapping="Wrap" Width="600" Margin="3,0,10,0" />
+                <Button x:Name="BtnSendMessage" Content="Send" Width="45" Click="BtnSendMessage_Click"/>
+            </StackPanel>
+        </GroupBox>
+        
+        <GroupBox x:Name="groupBox1" Header="Messages" Height="299">
+            <ListBox x:Name="listBox">
+                <ListBoxItem Content="Teste"/>
+            </ListBox>
+        </GroupBox>
+
+        <Popup Name="PopupError" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsOpen="False" PopupAnimation="Fade">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBlock Name="TxtPopUpError" Margin="1,1,1,1" Background="Red" Height="40" Width="400" HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="False" ScrollViewer.CanContentScroll="True" />
+                <Button Content="Close Pupup" Click="Button_Click" />
+            </StackPanel>
+        </Popup>
+
+    </StackPanel>
+</Window>
