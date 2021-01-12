@@ -1,5 +1,6 @@
 ﻿using ChatExample.Hub;
 using GameModels.Mongo.v1;
+using GameServices.v1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,35 +33,55 @@ namespace ChatExample
 
         private async void BtnConnect_Click(object sender, RoutedEventArgs e)
         {
-            if (!isEmptyFields())
+            try
             {
-                _chatHub = new ChatHub(getUri(), TxtPlayerId.Text, TxtGuildId.Text);
-                LblStatusConnection.Content = "Connecting to server!";
-                string statusConn = await _chatHub.ConnectAsync((message) => ReceiveMessage(message));
-                LblStatusConnection.Content = statusConn;
-                BtnConnect.IsEnabled = false;
-                BtnSendMessage.IsEnabled = true;
+                if (!IsEmptyFields())
+                {
+                    LblStatusConnection.Background = Brushes.LightYellow;
+                    _chatHub = new ChatHub(GetUri(), TxtPlayerId.Text, TxtGuildId.Text);
+                    LblStatusConnection.Content = "Connecting to server!";
+                    string statusConn = await _chatHub.ConnectAsync((message) => ReceiveMessage(message), OnClose);
+                    LblStatusConnection.Content = statusConn;
+                    LblStatusConnection.Background = Brushes.LightGreen;
+                    BtnConnect.IsEnabled = false;
+                    BtnSendMessage.IsEnabled = true;
+                    TxtMssg.IsEnabled = true;
+                    await GetLastMessages();
+                }
+            }
+            catch (Exception ex)
+            {
+                LblStatusConnection.Content = ex.Message;
+                LblStatusConnection.Background = Brushes.LightCoral;
             }
         }
 
-        private void BtnSendMessage_Click(object sender, RoutedEventArgs e)
+        private async void BtnSendMessage_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (TxtMssg.Text.Trim().Length > 0)
             {
+                TxtMssg.BorderBrush = Brushes.Gray;
                 Message message = new Message
                 {
                     PlayerId = TxtPlayerId.Text,
                     GuildId = TxtGuildId.Text,
                     Text = TxtMssg.Text
                 };
-                _chatHub.SendMessage(message);
-                TxtMssg.Text = "";
+                try
+                {
+                    await _chatHub.SendMessage(message);
+                    TxtMssg.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    AddListBoxItem($"Error on send message: {message.Text}", isError: true);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                openPopup(ex.Message);
+                OpenPopup("Por favor insira a mensagem");
+                TxtMssg.BorderBrush = Brushes.Red;
             }
-            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -68,7 +89,69 @@ namespace ChatExample
             this.PopupError.IsOpen = false;
         }
 
-        private bool isEmptyFields()
+        private async Task GetLastMessages()
+        {
+            try
+            {
+                IGuildChatService guildChatService = new GuildChatService();
+                List<Message> messages = await guildChatService.GetLastMessages(TxtGuildId.Text);
+                foreach (var message in messages)
+                {
+                    AddListBoxItem(GetMessage(message));
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
+        public void ReceiveMessage(Message message)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                AddListBoxItem(GetMessage(message));
+            });
+        }
+
+        public async Task OnClose(Exception e)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                LblStatusConnection.Content = $"-= Reconnecting =- Error: {e.Message}";
+                BtnConnect.IsEnabled = true;
+                BtnSendMessage.IsEnabled = false;
+                TxtMssg.IsEnabled = false;
+                LblStatusConnection.Background = Brushes.LightYellow;
+            });
+        }
+
+        private void AddListBoxItem(string text, bool isError=false)
+        {
+            ListBoxItem itm = new ListBoxItem();
+            itm.Content = text;
+            itm.Background = isError ? Brushes.LightCoral : Brushes.LightGreen;
+
+            listBox.Items.Add(itm);
+        }
+
+        private string GetMessage(Message message)
+        {
+            return $"{message.SendAt.ToString("G")} - {message.PlayerName}: {message.Text}";
+        }
+
+        private void OpenPopup(string error)
+        {
+            TxtPopUpError.Text = error;
+            PopupError.IsOpen = true;
+        }
+
+        private string GetUri()
+        {
+            return $"{TxtHost.Text}:{TxtPort.Text}/{TxtService.Text}";
+        }
+
+        private bool IsEmptyFields()
         {
             List<string> emptyFields = new List<string>();
             if (TxtHost.Text.Trim().Length <= 0)
@@ -104,38 +187,10 @@ namespace ChatExample
                     emptyFieldsStr += $"{field}, ";
                 }
                 string emptyFieldsError = $"{emptyFieldsStr.Substring(0, emptyFieldsStr.Length - 2)} is empty!";
-                openPopup(emptyFieldsError);
+                OpenPopup(emptyFieldsError);
                 return true;
             }
             return false;
-        }
-
-        private void openPopup(string error)
-        {
-            TxtPopUpError.Text = error;
-            PopupError.IsOpen = true;
-        }
-
-        private string getUri()
-        {
-            return $"{TxtHost.Text}:{TxtPort.Text}/{TxtService.Text}";
-        }
-
-        public void ReceiveMessage(Message message)
-        {
-            this.Dispatcher.Invoke(() =>
-            {
-                ListBoxItem itm = new ListBoxItem();
-                itm.Content = $"{message.PlayerName}: {message.Text}";
-
-                listBox.Items.Add(itm);
-            });
-        }
-        
-        public void OnDisconnect()
-        {
-            BtnConnect.IsEnabled = true;
-            BtnSendMessage.IsEnabled = false;
         }
     }
 }

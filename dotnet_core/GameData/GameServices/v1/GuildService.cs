@@ -11,6 +11,7 @@ namespace GameServices.v1
     public class GuildService : IGuildService
     {
         string uri = "http://localhost:54964";
+
         public async Task<Guild> GetById(string guildId)
         {
             Guild guild = null;

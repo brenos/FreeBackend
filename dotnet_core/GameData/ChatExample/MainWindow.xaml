@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChatExample"
         mc:Ignorable="d"
-        Title="Chat Example" Height="450" Width="800">
+        Title="Chat Example" Height="488" Width="800">
     
     <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         
@@ -20,28 +20,27 @@
         
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,3,0,0">
             <Label Content="PlayerId" />
-            <TextBox x:Name="TxtPlayerId" Text="" VerticalAlignment="Center" Margin="3,0,10,0" Width="120" BorderBrush="Black" />
+            <TextBox x:Name="TxtPlayerId" Text="c262a8e3-d5c8-44ad-857b-94cc15b45868" VerticalAlignment="Center" Margin="3,0,10,0" Width="237" BorderBrush="Black" />
             <Label Content="GuildId" />
-            <TextBox x:Name="TxtGuildId" Text="bfb17ab5-3ac1-4ee8-8f80-2ade9dccb77a" VerticalAlignment="Center" Margin="3,0,10,0" Width="120" BorderBrush="Black" />
+            <TextBox x:Name="TxtGuildId" Text="bfb17ab5-3ac1-4ee8-8f80-2ade9dccb77a" VerticalAlignment="Center" Margin="3,0,10,0" Width="245" BorderBrush="Black" />
             <Button Name="BtnConnect" Content="Connect" Click="BtnConnect_Click" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Silver" Margin="0,3,0,0">
-            <Label Content="Status Connections:" FontSize="9" FontFamily="Arial"/>
-            <Label Name="LblStatusConnection" Content="Await connect!" FontSize="9" FontFamily="Arial"  />
+            <Label Content="Status Connections:" FontSize="12" FontFamily="Arial"/>
+            <Label Name="LblStatusConnection" Content="Await connect!" FontSize="12" FontFamily="Arial"  />
         </StackPanel>
         
         <GroupBox x:Name="groupBox" Header="Send Message" Height="57">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Silver" Margin="0,3,0,0">
                 <Label x:Name="label" Content="Message" VerticalAlignment="Center"/>
-                <TextBox x:Name="TxtMssg" Text="" VerticalAlignment="Center" TextWrapping="Wrap" Width="600" Margin="3,0,10,0" />
+                <TextBox x:Name="TxtMssg" Text="" VerticalAlignment="Center" TextWrapping="Wrap" Width="600" Margin="3,0,10,0" IsEnabled="False" />
                 <Button x:Name="BtnSendMessage" Content="Send" Width="45" Click="BtnSendMessage_Click" IsEnabled="False" />
             </StackPanel>
         </GroupBox>
         
         <GroupBox x:Name="groupBox1" Header="Messages" Height="299">
-            <ListBox x:Name="listBox">
-            </ListBox>
+            <ListBox x:Name="listBox" SelectionMode="Single" Cursor=""/>
         </GroupBox>
 
         <Popup Name="PopupError" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsOpen="False" PopupAnimation="Fade">

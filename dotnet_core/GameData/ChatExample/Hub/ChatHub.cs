@@ -21,7 +21,7 @@ namespace ChatExample.Hub
             _guildId = guildId;
         }
 
-        public async Task<string> ConnectAsync(Action<Message> ReceiveMessage)
+        public async Task<string> ConnectAsync(Action<Message> ReceiveMessage, Func<Exception, Task> OnClose)
         {
             try
             {
@@ -31,6 +31,8 @@ namespace ChatExample.Hub
                     .Build();
 
                 _connection.On<Message>("ReceiveMessage", (message) => ReceiveMessage(message));
+                _connection.Closed += OnClose;
+                _connection.Reconnecting += OnClose;
 
                 await _connection.StartAsync();
                 await AddToGroup(_guildId);
@@ -39,7 +41,7 @@ namespace ChatExample.Hub
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                throw ex;
             }
         }
 
@@ -50,7 +52,14 @@ namespace ChatExample.Hub
 
         public async Task SendMessage(Message message)
         {
-            await _connection.InvokeAsync("SendMessage", message);
+            try
+            {
+                await _connection.InvokeAsync("SendMessage", message);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
