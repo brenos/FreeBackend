@@ -20,8 +20,20 @@ namespace GuildChat.Hubs.v1
 
         public override Task OnConnectedAsync()
         {
-            string a = "";
             return base.OnConnectedAsync();
+        }
+
+        public override async Task OnDisconnectedAsync(Exception exception)
+        {
+            try
+            {
+                var user = this.Context.User;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            await base.OnDisconnectedAsync(exception);
         }
 
         public async Task AddToGroup(string groupId)
